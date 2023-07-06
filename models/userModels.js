@@ -3,6 +3,13 @@ const asyncHandler = require('express-async-handler');
 const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient()
 
+const getUserInfo = asyncHandler(async () =>{
+    const response = await prisma.users.findMany();
+    await prisma. $disconnect();
+    console.log(response);
+    return response;
+})
+
 const postUser = asyncHandler( async (info) =>{
     const response = await prisma.users.create(
         {
@@ -19,6 +26,37 @@ const postUser = asyncHandler( async (info) =>{
     return response;
 })
 
+const updateUserInfo = asyncHandler(async(user_id, info) =>{
+    const response = await prisma.users.update(
+        {
+            where : {
+                id: user_id
+            },
+            data : {
+                    firstName: info.firstName,
+                    lastName: info.lastName,
+                    email: info.email,
+                    password: info.password,
+                    role_id: info.role_id
+            }
+        }
+    )
+})
+
+const deleteUserInfo = asyncHandler(async(user_id) =>{
+    const response = await prisma.users.delete(
+        {
+            where : {
+                id: user_id
+            }
+        }
+    )
+    return response;
+})
+
 module.exports = {
-    postUser
+    getUserInfo,
+    postUser,
+    updateUserInfo,
+    deleteUserInfo
 }
