@@ -56,7 +56,7 @@ const loginUser = asyncHandler(async (req, res) =>{
         //     expiresIn: '30m'
         // }
     )
-    await setRefreshToken(email, refreshToken);
+    setRefreshToken(email, refreshToken);
     res.status(200).json(
         {
             status: 200,

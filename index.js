@@ -7,7 +7,8 @@ const {
     productRouter,
     orderRouter,
     loginRouter,
-    logoutRouter
+    logoutRouter,
+    registerRouter
 } = require('./routes');
 
 //Import middlewares
@@ -28,6 +29,7 @@ app.get('/',(req, res) =>{
 })
 
 app.use('/api/v1/login', loginRouter);
+app.use('/api/v1/register',registerRouter);
 
 app.use(verifyJWT);
 
