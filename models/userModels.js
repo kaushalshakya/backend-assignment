@@ -1,7 +1,7 @@
 const asyncHandler = require('express-async-handler');
 
-const { PrismaClient } = require('@prisma/client')
-const prisma = new PrismaClient()
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
 
 const getUserInfo = asyncHandler(async () =>{
     const response = await prisma.users.findMany();
@@ -41,6 +41,8 @@ const updateUserInfo = asyncHandler(async(user_id, info) =>{
             }
         }
     )
+    await prisma.$disconnect();
+    return response;
 })
 
 const deleteUserInfo = asyncHandler(async(user_id) =>{
@@ -51,6 +53,7 @@ const deleteUserInfo = asyncHandler(async(user_id) =>{
             }
         }
     )
+    await prisma.$disconnect();
     return response;
 })
 
