@@ -6,7 +6,6 @@ const prisma = new PrismaClient();
 const getUserInfo = asyncHandler(async () =>{
     const response = await prisma.users.findMany();
     await prisma. $disconnect();
-    console.log(response);
     return response;
 })
 

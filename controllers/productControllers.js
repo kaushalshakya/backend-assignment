@@ -18,6 +18,14 @@ const allProducts = asyncHandler(async(req, res) =>{
 })
 
 const addProduct = asyncHandler(async(req, res) =>{
+    if(req.role !== 2){
+        return res.status(401).json(
+            {
+                status: 401,
+                message: 'Unauthorized'
+            }
+        )
+    }
     const data = {
         name: req.body.name,
         description: req.body.description,
@@ -33,6 +41,14 @@ const addProduct = asyncHandler(async(req, res) =>{
 })
 
 const updateProduct = asyncHandler(async(req, res) =>{
+    if(req.role !== 2){
+        return res.status(401).json(
+            {
+                status: 401,
+                message: 'Unauthorized'
+            }
+        )
+    }
     const id = parseInt(req.params.id);
     const data = {
         name: req.body.name,
@@ -49,6 +65,14 @@ const updateProduct = asyncHandler(async(req, res) =>{
 })
 
 const deleteProduct = asyncHandler(async(req, res) =>{
+    if(req.role !== 2){
+        return res.status(401).json(
+            {
+                status: 401,
+                message: 'Unauthorized'
+            }
+        )
+    }
     const id = parseInt(req.params.id);
     const result = await deleteProductDetails(id);
     return res.status(200).json(

@@ -7,6 +7,15 @@ const bcrypt = require('bcryptjs');
 const asyncHandler = require('express-async-handler');
 
 const allUserInfo = asyncHandler(async(req, res) =>{
+    console.log(req.role);
+    if(req.role !== 2){
+        return res.status(401).json(
+            {
+                status: 401,
+                message: 'Unauthorized'
+            }
+        )
+    }
     const {page, limit, offset} = req.pagination;
     const response = await getUserInfo(limit, offset);
     const paginationInfo = {
@@ -24,7 +33,7 @@ const allUserInfo = asyncHandler(async(req, res) =>{
 })
 
 const updateUser = asyncHandler(async(req, res) =>{
-    const id = parseInt(req.params.id);
+    const id = parseInt(req.id);
     if(req.body.password){
         const salt = bcrypt.genSaltSync(10);
         var hash = bcrypt.hashSync(req.body.password, salt);
@@ -46,7 +55,7 @@ const updateUser = asyncHandler(async(req, res) =>{
 })
 
 const deleteUser = asyncHandler(async (req, res) =>{
-    const id = parseInt(req.params.id);
+    const id = parseInt(req.id);
     const result = await deleteUserInfo(id);
     return res.status(200).json(
         {

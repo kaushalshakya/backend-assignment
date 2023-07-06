@@ -8,7 +8,7 @@ const {
 const paginateResults = require('../middlewares/paginateResults');
 
 router.get('/', paginateResults, allUserInfo);
-router.put('/:id', updateUser);
-router.delete('/:id', deleteUser);
+router.put('/profile', updateUser);
+router.delete('/profile', deleteUser);
 
 module.exports = router;
