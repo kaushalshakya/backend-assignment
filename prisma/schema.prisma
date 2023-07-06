@@ -37,6 +37,7 @@ model Orders {
   id          Int            @id @default(autoincrement())
   createdAt   DateTime       @default(now())
   updatedAt   DateTime       @updatedAt
+  quantity    Int
   totalAmount Float
   userId      Int
   user        Users          @relation(fields: [userId], references: [id])
