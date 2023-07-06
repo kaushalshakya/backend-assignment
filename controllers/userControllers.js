@@ -8,10 +8,16 @@ const bcrypt = require('bcryptjs');
 const asyncHandler = require('express-async-handler');
 
 const allUserInfo = asyncHandler(async(req, res) =>{
-    const response = await getUserInfo();
+    const {page, limit, offset} = req.pagination;
+    const response = await getUserInfo(limit, offset);
+    const paginationInfo = {
+        currentPage: page,
+        itemsPerPage: limit
+    }
     return res.status(200).json(
         {
             status: 200,
+            paginationInfo: paginationInfo,
             message: 'All users:',
             data: response
         }

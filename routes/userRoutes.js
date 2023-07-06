@@ -5,9 +5,9 @@ const {
     updateUser,
     deleteUser
  } = require('../controllers/userControllers');
+const paginateResults = require('../middlewares/paginateResults');
 
-
-router.get('/', allUserInfo);
+router.get('/', paginateResults, allUserInfo);
 router.post('/', registerUser);
 router.put('/:id', updateUser);
 router.delete('/:id', deleteUser);
