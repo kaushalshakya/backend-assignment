@@ -6,8 +6,11 @@ const errorHandler = require('./middlewares/errorHandler');
 const {
     userRouter, 
     productRouter,
-    orderRouter
+    orderRouter,
+    loginRouter
 } = require('./routes');
+
+const verifyJWT = require('./middlewares/verifyJWT');
 
 app.use(express.json());
 
@@ -20,6 +23,9 @@ app.get('/',(req, res) =>{
         )
 })
 
+app.use('/api/v1/login', loginRouter);
+
+app.use(verifyJWT);
 
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/products', productRouter);
