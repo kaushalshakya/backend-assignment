@@ -52,9 +52,9 @@ const loginUser = asyncHandler(async (req, res) =>{
             role: payload.role,
             id: payload.id
         }, process.env.REFRESH_TOKEN,
-        {
-            expiresIn: '30m'
-        }
+        // {
+        //     expiresIn: '30m'
+        // }
     )
     await setRefreshToken(email, refreshToken);
     res.status(200).json(

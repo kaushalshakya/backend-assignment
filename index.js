@@ -7,7 +7,8 @@ const {
     userRouter, 
     productRouter,
     orderRouter,
-    loginRouter
+    loginRouter,
+    logoutRouter
 } = require('./routes');
 
 const verifyJWT = require('./middlewares/verifyJWT');
@@ -30,6 +31,7 @@ app.use(verifyJWT);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/products', productRouter);
 app.use('/api/v1/orders', orderRouter);
+app.use('/api/v1/logout', logoutRouter);
 app.use(errorHandler);
 
 app.listen(PORT, () =>{
