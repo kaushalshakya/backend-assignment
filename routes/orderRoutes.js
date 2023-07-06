@@ -1,10 +1,11 @@
 const { 
-    allOrders 
+    allOrders, 
+    newOrder 
 } = require('../controllers/orderControllers');
 const router = require('express').Router();
 
 router.get('/', allOrders);
-router.post('/');
+router.post('/', newOrder);
 router.put('/:id');
 router.delete('/:id');
 
